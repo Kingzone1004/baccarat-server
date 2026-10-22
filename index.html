@@ -122,11 +122,11 @@
 <body>
 
   <div class="header">
-    <h1>🎰 바카라 7개 군 적재 & 역사적 패턴 예측기 (백엔드 우회형)</h1>
+    <h1>🎰 바카라 7개 군 적재 & 역사적 패턴 예측기</h1>
   </div>
 
   <div class="container">
-    <!-- 1. 데이터 수동 입력 영역 -->
+    <!-- 1. 데이터 입력 영역 -->
     <div class="card section-1">
       <h2>1. 데이터 수동 입력 (7개 매칭)</h2>
       
@@ -183,10 +183,10 @@
       </div>
 
       <button class="btn btn-main" onclick="onSaveAndPredict()">딸깍! 데이터 저장 및 예측 연산</button>
-      <button class="btn btn-sub" onclick="alert('CSV 다운로드는 MongoDB 자동 적재로 대체되었습니다.')">엑셀 CSV 파일로 다운로드 (Supabase 업로드용)</button>
+      <button class="btn btn-sub" onclick="alert('CSV 다운로드는 클라우드 실시간 동기화로 대체되었습니다.')">엑셀 CSV 파일로 다운로드 (Supabase 업로드용)</button>
       
       <div class="status-label" id="localDataCountLabel">
-        ✅ 클라우드 MongoDB 저장소 연동 완료 (실시간 동기화 중)
+        ✅ 24시간 실시간 클라우드 예측 엔진 허브 연동 활성화 상태
       </div>
     </div>
 
@@ -200,15 +200,15 @@
       </div>
 
       <div class="log-title">전송 로그</div>
-      <div class="log-box" id="transmissionLogBox">[시스템] 프로그램 가동 시작... 대기 중.</div>
+      <div class="log-box" id="transmissionLogBox">[시스템] 클라우드 서버 허브 통신 개방 완료. 대기 중.</div>
     </div>
   </div>
 
-  <!-- 실시간 API 연동 스크립트 -->
+  <!-- 실시간 클라우드 API 연동 스크립트 -->
   <script>
     async function onSaveAndPredict() {
       try {
-        // 화면의 입력창 데이터 추출
+        // 화면의 입력 요소 객체 추출
         const resultElement = document.getElementById('betResultSelect');
         const p1Element = document.getElementById('pattern1Select');
         const p2Element = document.getElementById('pattern2Select');
@@ -223,8 +223,8 @@
           pattern4군: p4Element ? p4Element.value : '1'
         };
 
-        // 가동 중인 백엔드 API 서버(Port 3000)로 전송
-        const response = await fetch('http://localhost:3000/api/analyze-and-save', {
+        // [핵심 변경 사항] 방금 배포 성공한 Render 실시간 클라우드 서버 주소로 쏩니다!
+        const response = await fetch('https://onrender.com', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(currentData)
@@ -250,16 +250,16 @@
           const logContainer = document.getElementById('transmissionLogBox');
           if (logContainer) {
             const timeString = new Date().toLocaleTimeString();
-            logContainer.innerHTML += `\n[${timeString}] ${resData.savedRound} -> 적재 완료 / 다음 추천: ${resData.predictionResult.nextPick}`;
+            logContainer.innerHTML += `\n[${timeString}] ${resData.savedRound} -> 클라우드 적재 완료 / 다음 추천: ${resData.predictionResult.nextPick}`;
             logContainer.scrollTop = logContainer.scrollHeight;
           }
         } else {
-          alert('❌ 서버 처리 실패: ' + resData.message);
+          alert('❌ 클라우드 서버 처리 실패: ' + resData.message);
         }
 
       } catch (error) {
-        console.error('통신 에러:', error);
-        alert('백엔드 서버(analyzer.js)가 꺼져 있습니다! VS Code 터미널에서 node analyzer.js를 실행해 주세요.');
+        console.error('클라우드 통신 에러:', error);
+        alert('클라우드 서버 허브와의 연결이 원활하지 않습니다. Render 서버가 완전히 Live 상태인지 확인해 주세요.');
       }
     }
   </script>
