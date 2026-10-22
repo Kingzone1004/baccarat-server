@@ -1,0 +1,20 @@
+{
+  "name": "baccarat-analyzer",
+  "version": "1.0.0",
+  "description": "Baccarat Pattern Analyzer",
+  "main": "analyzer.js",
+  "scripts": {
+    "start": "node analyzer.js",
+    "electron": "electron ."
+  },
+  "author": "ploki",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0"
+  }
+}

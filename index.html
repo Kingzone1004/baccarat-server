@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>바카라 7개 군 적재 & 역사적 패턴 예측기</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Malgun Gothic', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      flex: 1;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+    .section-1 h2 { color: #4caf50; }
+    .section-2 h2 { color: #00e5ff; }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 5px;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      background-color: #2a2a2a;
+      border: 1px solid #3a3a3a;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .grid-inputs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 15px;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .btn-main {
+      background-color: #4caf50;
+      color: #fff;
+    }
+    .btn-main:hover { background-color: #45a049; }
+    .btn-sub {
+      background-color: #009688;
+      color: #fff;
+    }
+    
+    .status-label {
+      font-size: 13px;
+      color: #4caf50;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .predict-box {
+      background-color: #252525;
+      border-left: 4px solid #00e5ff;
+      padding: 15px;
+      border-radius: 4px;
+      min-height: 80px;
+      margin-top: 20px;
+    }
+    .log-title {
+      color: #4caf50;
+      margin-top: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .log-box {
+      width: 100%;
+      height: 150px;
+      background-color: #000;
+      color: #00ff00;
+      font-family: 'Consolas', monospace;
+      padding: 10px;
+      border-radius: 4px;
+      box-sizing: border-box;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🎰 바카라 7개 군 적재 & 역사적 패턴 예측기 (백엔드 우회형)</h1>
+  </div>
+
+  <div class="container">
+    <!-- 1. 데이터 수동 입력 영역 -->
+    <div class="card section-1">
+      <h2>1. 데이터 수동 입력 (7개 매칭)</h2>
+      
+      <div style="display: flex; gap: 10px;">
+        <div class="form-group" style="flex: 1;">
+          <label>승패 구분</label>
+          <select id="betResultSelect">
+            <option value="PLAYER">PLAYER (파란색)</option>
+            <option value="BANKER">BANKER (빨간색)</option>
+            <option value="TIE">TIE (초록색)</option>
+          </select>
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label>색상 코드 (P/B)</label>
+          <select id="colorCodeSelect">
+            <option value="2">2 (파란색 / 플레이어)</option>
+            <option value="1">1 (빨간색 / 뱅커)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-inputs">
+        <div>
+          <label>본매</label>
+          <select id="mainBetSelect">
+            <option value="P">P</option>
+            <option value="B">B</option>
+          </select>
+        </div>
+        <div>
+          <label>1군</label>
+          <select id="pattern1Select">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          </select>
+        </div>
+        <div>
+          <label>2군</label>
+          <select id="pattern2Select">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          </select>
+        </div>
+        <div>
+          <label>3군</label>
+          <select id="pattern3Select">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          </select>
+        </div>
+        <div>
+          <label>4군</label>
+          <select id="pattern4Select">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-main" onclick="onSaveAndPredict()">딸깍! 데이터 저장 및 예측 연산</button>
+      <button class="btn btn-sub" onclick="alert('CSV 다운로드는 MongoDB 자동 적재로 대체되었습니다.')">엑셀 CSV 파일로 다운로드 (Supabase 업로드용)</button>
+      
+      <div class="status-label" id="localDataCountLabel">
+        ✅ 클라우드 MongoDB 저장소 연동 완료 (실시간 동기화 중)
+      </div>
+    </div>
+
+    <!-- 2. 실시간 패턴 예측 엔진 영역 -->
+    <div class="card section-2">
+      <h2>2. 실시간 패턴 예측 엔진</h2>
+      <p style="font-size: 12px; color: #888;">현재 세팅된 [본매-1-2-3-4군] 조합이 데이터베이스에 기록되었을 때, 그 다음에 어떤 결과가 많이 나왔는지 실시간 매칭 계산합니다.</p>
+      
+      <div class="predict-box" id="predictionDisplayBox">
+        <span style="color: #ffb300; font-weight: bold;">패턴 매칭 준비 완료 (데이터 입력 대기)</span>
+      </div>
+
+      <div class="log-title">전송 로그</div>
+      <div class="log-box" id="transmissionLogBox">[시스템] 프로그램 가동 시작... 대기 중.</div>
+    </div>
+  </div>
+
+  <!-- 실시간 API 연동 스크립트 -->
+  <script>
+    async function onSaveAndPredict() {
+      try {
+        // 화면의 입력창 데이터 추출
+        const resultElement = document.getElementById('betResultSelect');
+        const p1Element = document.getElementById('pattern1Select');
+        const p2Element = document.getElementById('pattern2Select');
+        const p3Element = document.getElementById('pattern3Select');
+        const p4Element = document.getElementById('pattern4Select');
+
+        const currentData = {
+          result: resultElement ? resultElement.value : 'PLAYER',
+          pattern1군: p1Element ? p1Element.value : '1',
+          pattern2군: p2Element ? p2Element.value : '1',
+          pattern3군: p3Element ? p3Element.value : '1',
+          pattern4군: p4Element ? p4Element.value : '1'
+        };
+
+        // 가동 중인 백엔드 API 서버(Port 3000)로 전송
+        const response = await fetch('http://localhost:3000/api/analyze-and-save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(currentData)
+        });
+
+        const resData = await response.json();
+
+        if (resData.success) {
+          // 우측 패턴 예측창 UI 업데이트
+          const predictionBox = document.getElementById('predictionDisplayBox');
+          if (predictionBox) {
+            predictionBox.innerHTML = `
+              <div style="line-height: 1.6;">
+                <p style="color: #00ff00; font-weight: bold; margin: 0 0 8px 0;">📊 패턴 연산 완료!</p>
+                <p style="margin: 4px 0;">🔮 다음 회차 추천 픽: <span style="color: #ff0055; font-weight: bold; font-size: 16px;">${resData.predictionResult.nextPick}</span></p>
+                <p style="margin: 4px 0;">🎯 패턴 추천 확률: <span style="color: #00e5ff; font-weight: bold; font-size: 18px;">${resData.predictionResult.probability}</span></p>
+                <p style="font-size: 11px; color: #aaa; margin: 6px 0 0 0;">(동일 패턴 DB 매칭: ${resData.predictionResult.matchCount}회)</p>
+              </div>
+            `;
+          }
+
+          // 하단 검은색 전송 로그박스에 실시간 히스토리 출력
+          const logContainer = document.getElementById('transmissionLogBox');
+          if (logContainer) {
+            const timeString = new Date().toLocaleTimeString();
+            logContainer.innerHTML += `\n[${timeString}] ${resData.savedRound} -> 적재 완료 / 다음 추천: ${resData.predictionResult.nextPick}`;
+            logContainer.scrollTop = logContainer.scrollHeight;
+          }
+        } else {
+          alert('❌ 서버 처리 실패: ' + resData.message);
+        }
+
+      } catch (error) {
+        console.error('통신 에러:', error);
+        alert('백엔드 서버(analyzer.js)가 꺼져 있습니다! VS Code 터미널에서 node analyzer.js를 실행해 주세요.');
+      }
+    }
+  </script>
+</body>
+</html>
